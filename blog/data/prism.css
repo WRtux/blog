@@ -1,0 +1,88 @@
+/** Adapted from prism.js default theme for JavaScript, CSS and HTML */
+#wrapper pre> code {
+	tab-size: 4;
+	background-color: #fcf9f9;
+	color: #346;
+	text-shadow: 0 1px #fff;
+}
+#wrapper pre> code::selection,
+#wrapper pre> code ::selection {
+	background-color: #b3d4fc;
+	text-shadow: none;
+}
+
+@media print {
+	#wrapper pre> code {
+		text-shadow: none;
+	}
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+	color: #789;
+}
+
+.token.punctuation {
+	color: #999;
+}
+
+.token.namespace {
+	opacity: 0.8;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+	color: #905;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+	color: #690;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string {
+	color: #9a6e3a;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+	color: #07a;
+}
+
+.token.function,
+.token.class-name {
+	color: #dd4a68;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+	color: #e90;
+}
+
+.token.important,
+.token.bold {
+	font-weight: bold;
+}
+.token.italic {
+	font-style: italic;
+}
+
+.token.entity {
+	cursor: help;
+}

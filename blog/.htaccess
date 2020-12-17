@@ -1,0 +1,20 @@
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+
+RewriteRule ^$ /main [R=301]
+RewriteRule ^index.html$ /main [R=301]
+
+RewriteRule ^main$ /main.html
+
+RewriteRule ^about$ /view.html
+
+RewriteRule ^list$ /list.html
+RewriteRule ^list/ /view.html
+
+RewriteRule ^draft/ - [F]
+
+ErrorDocument 403 /data/403.html
+ErrorDocument 404 /data/404.html
+
+</IfModule>

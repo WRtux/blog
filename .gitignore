@@ -1,0 +1,5 @@
+# Archived files
+/file/
+
+# Security related (SSL certificates, private keys, etc.)
+/security/

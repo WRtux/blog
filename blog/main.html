@@ -1,0 +1,23 @@
+<html><head>
+ <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.5, user-scalable=yes" />
+ <title>Wilderness Ranger's Blog</title>
+ <link rel="stylesheet" href="/data/marked.css" />
+ <link rel="stylesheet" href="/data/prism.css" />
+</head><body>
+ <div id="wrapper"><h3>Loading</h3></div>
+ <script src="/data/marked.min.js"></script>
+ <script src="//cdn.jsdelivr.net/npm/prismjs@1.22/components/prism-core.min.js"></script>
+ <script src="//cdn.jsdelivr.net/npm/prismjs@1.22/plugins/autoloader/prism-autoloader.min.js"></script>
+ <script type="text/javascript">
+ var url = location.pathname;
+ url = url.replace(new RegExp("^/list/"), "/blog/");
+ url += ".md";
+ var xhr = new XMLHttpRequest();
+ xhr.open("GET", url, false);
+ xhr.send();
+ if (xhr.status >= 200 && xhr.status < 300)
+  document.getElementById("wrapper").innerHTML = marked(xhr.responseText);
+ else
+  document.getElementById("wrapper").children[0].innerHTML = "Failed to render: " + xhr.status;
+ </script>
+</body></html>
