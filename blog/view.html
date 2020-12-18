@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+
+<html><head>
+ <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.5, user-scalable=yes" />
+ <title>Loading - Wilderness Ranger</title>
+ <link rel="stylesheet" href="/data/frame.css" />
+ <link rel="stylesheet" href="/data/banner.css" />
+ <link rel="stylesheet" href="/data/nav.css" />
+ <link rel="stylesheet" href="/data/content.css" />
+ <link rel="stylesheet" href="/data/font/icons.css" />
+ <script src="/data/jsease.min.js"></script>
+ <script src="/data/marked.min.js"></script>
+ <script src="//cdn.jsdelivr.net/npm/prismjs@1.22/components/prism-core.min.js"></script>
+ <script src="//cdn.jsdelivr.net/npm/prismjs@1.22/plugins/autoloader/prism-autoloader.min.js"></script>
+ <link rel="stylesheet" href="/data/prism.css" />
+</head><body>
+
+<nav id="floater">
+ <img class="floater-avatar" src="/data/avatar.png" /><a class="floater-header" href="/main">Wilderness Ranger</a>
+ <button class="floater-menu icon" title="Settings">⚙</button><ul class="floater-cascade">
+  <a class="icon-list" onclick="interact('M');">Markdown</a>
+  <hr />
+  <a class="icon-moon" onclick="interact('D');">Auto</a>
+ </ul>
+ <button class="floater-menu icon" title="Information">i</button><ul class="floater-cascade">
+  <a href="//github.com/WRtux/blog">Version 0.2</a>
+ </ul>
+</nav>
+
+<div id="wrapper">
+ <article id="marked">
+  <!-- Dynamic -->
+  <h2>Loading</h2>
+  <p>Markdown reader by Wilderness Ranger. <noscript>To run Marked renderer, please enable JavaScript.</noscript></p>
+ </article>
+</div>
+
+<script type="text/javascript">"use strict";
+var url = location.pathname;
+url = url.replace(new RegExp("^/list/"), "/blog/");
+url += ".md";
+
+function createDark() {
+	var ele = $.createElement("style");
+	var stys = $.forTagName("link")[0].sheet;
+	var ruls = stys.cssRules, txtRul = "";
+	for (var i = 0; i < ruls.length; i++) {
+		var rul = ruls[i];
+		if (rul instanceof CSSMediaRule && rul.conditionText.indexOf("dark") != -1) {
+			rul = rul.cssRules;
+			for (var j = 0; j < rul.length; j++)
+				txtRul += rul[j].cssText;
+			stys.removeRule(i--);
+		}
+	}
+	ele.textContent = txtRul;
+	return ele;
+}
+
+function renderDirect(id, url) {
+	var cont = $.getElement(id);
+	var xhr = new XMLHttpRequest();
+	xhr.open("GET", url, false);
+	xhr.send();
+	if (xhr.status >= 200 && xhr.status < 300)
+		cont.innerHTML = marked(xhr.responseText);
+	else {
+		$.removeChildren(cont);
+		cont.appendChild($.createElement("h2", "Failed to render: " + xhr.status));
+	}
+}
+
+function interact(act) {
+	switch(act) {
+	case "markdown":
+	case 'M':
+		window.open(url);
+		break;
+	case "dark":
+	case 'D':
+		document.body.appendChild(createDark());
+		break;
+	}
+}
+
+(function () {
+	renderDirect("marked", url);
+})();
+
+</script>
+</body></html>
