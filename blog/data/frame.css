@@ -1,0 +1,96 @@
+html {
+	--font-sans: "Helvetica", "Arial", "Droid Sans",
+		"Noto Sans CJK SC", "Microsoft YaHei",
+		"Calibri", sans-serif;
+	--font-serif: "Times", "Georgia",
+		"Source Han Serif SC", "STZhongsong",
+		"Lucida Bright", "Century", serif;
+	--font-monospace: "Consolas", "Droid Sans Mono",
+		"Monaco", "Lucida Console", "Courier New", monospace;
+	
+	--void: #f7f7f7;
+	--background-normal: #ffffff;
+	--background-glass: #ffffffcc;
+	--background-interface: #eeeeeecc;
+	--background-mark: #f7f7ff;
+	--background-aux: #fffff7;
+	--border-normal: #ddccff;
+	--border-interface: #dddddd;
+	--border-aux: #ccffbb;
+	--text-normal: #223344;
+	--text-interface: menuText;
+	--text-mark: #663399;
+	--text-aux: #7755aa;
+	--text-reverse: #eef7ff;
+	
+	--shadow: 2px 2px 5px #22334433;
+	--shadow-text: 1px 1px #66339933;
+}
+
+@media screen and (prefers-color-scheme: dark) {
+	html {
+		--void: #090909;
+		--background-normal: #1a1a22;
+		--background-glass: #1a1a2266;
+		--background-interface: #222222;
+		
+		--border-normal: #663399;
+		--border-interface: #555555;
+		
+		--text-normal: #cccccc;
+		--text-interface: #eeeeee;
+		--text-mark: #cc66ff;
+		--text-aux: #cc66cc;
+		--text-reverse: #eeeeee;
+		--shadow: 1px 1px 0 #11112233;
+		--shadow-text: none;
+	}
+}
+
+body, #banner, #floater, #wrapper, article {
+	position: relative;
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	 background-color: #f7f7f7;
+	background-color: var(--void);
+}
+body> * {
+	display: none;
+}
+
+#wrapper {
+	display: block;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	
+	 font-family: sans-serif;
+	font-family: var(--font-sans);
+	line-height: 1.4;
+	
+	 background-color: #f7f7f7;
+	background-color: var(--void);
+	 color: #223344;
+	color: var(--text-normal);
+}
+#wrapper> * {
+	display: none;
+}
+
+#wrapper> article {
+	display: block;
+	margin: 20px auto;
+	min-width: 70%;
+	width: 960px;
+	max-width: 95%;
+	border-radius: 2px;
+	padding: 10px;
+	overflow: hidden;
+	
+	 background-color: #ffffff;
+	background-color: var(--background-normal);
+	box-shadow: var(--shadow);
+}

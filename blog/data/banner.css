@@ -1,0 +1,109 @@
+#banner {
+	display: block;
+	margin: 0;
+	height: 100vh;
+	padding: 10px;
+	overflow: hidden;
+	
+	 font-family: serif;
+	font-family: var(--font-serif);
+	line-height: 1.4;
+	text-align: center;
+	
+	 color: #eef7ff;
+	color: var(--text-reverse);
+	text-shadow: var(--shadow-text);
+}
+
+#banner h1, #banner h2, #banner p, #banner hr {
+	margin: 20px 0;
+}
+#banner ol, #banner ul, #banner blockquote, #banner input {
+	margin: 20px auto;
+	text-align: center;
+}
+
+#banner h1 {
+	margin-top: 20vh;
+	font-size: 2.5em;
+}
+#banner h2 {
+	font-size: 2.0em;
+}
+
+#banner hr {
+	border: none;
+}
+
+#banner input {
+	display: block;
+	border: none;
+	border-radius: 10px;
+	padding: 5px;
+	width: 50%;
+	max-width: 320px;
+	
+	font-family: inherit;
+	font-size: inherit;
+	
+	background-color: var(--background-glass);
+	color: var(--text-normal);
+	box-shadow: var(--shadow);
+	 -webkit-backdrop-filter: blur(2px);
+	backdrop-filter: blur(2px);
+	transition: background-color 0.3s;
+}
+#banner input:hover, #banner input:focus {
+	background-color: var(--background-normal);
+}
+
+#banner> .banner-background {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: -1;
+	height: 100vh;
+	
+	background-position: center;
+	background-size: cover;
+	transition: filter 0.5s;
+}
+#banner:active> .banner-background, #banner> .banner-focus:focus+ .banner-background {
+	filter: brightness(0.8);
+}
+
+@media screen and (max-aspect-ratio: 10/16) {
+	#banner {
+		height: 140vw;
+	}
+	#banner h1 {
+		margin-top: 25vw;
+	}
+	#banner> .banner-background {
+		height: 140vw;
+	}
+}
+
+@media screen and (prefers-color-scheme: dark) {
+	#banner> .banner-background {
+		filter: brightness(0.6);
+	}
+}
+
+@media print {
+	#banner {
+		display: none;
+	}
+}
+
+#floater+ #banner {
+	height: auto;
+}
+#floater+ #banner h1 {
+	margin-top: 20px;
+}
+#floater+ #banner> .banner-background {
+	position: absolute;
+	height: 100%;
+}

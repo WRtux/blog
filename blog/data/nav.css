@@ -1,0 +1,153 @@
+#floater {
+	 position: -webkit-sticky;
+	position: sticky;
+	top: 0;
+	z-index: 2;
+	display: block;
+	margin: 0;
+	padding: 0 5px;
+	
+	font-size: 1.2rem;
+	line-height: 2.5rem;
+	
+	color: var(--text-interface);
+}
+#floater::before {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: -1;
+	height: 2.5rem;
+	
+	content: "";
+	
+	background-image: linear-gradient(var(--background-glass), var(--background-interface));
+	 -webkit-backdrop-filter: blur(2px);
+	backdrop-filter: blur(2px);
+	box-shadow: var(--shadow);
+	transition: background-color 0.3s;
+}
+#floater:hover::before {
+	background-color: var(--background-normal);
+}
+
+#floater> * {
+	display: none;
+}
+#floater> .floater-avatar, #floater> .floater-header, #floater> .floater-menu {
+	display: inline-block;
+	vertical-align: bottom;
+}
+
+#floater> .floater-avatar {
+	box-sizing: border-box;
+	margin-right: 5px;
+	height: 2.5rem;
+	border: 2px solid var(--background-interface);
+	border-radius: 5px;
+	
+	background-color: var(--background-normal);
+	transition: border-color 0.3s, box-shadow 0.3s;
+}
+#floater> .floater-avatar:hover {
+	border-color: var(--border-interface);
+	box-shadow: var(--shadow);
+}
+
+#floater> .floater-header {
+	text-decoration: none;
+	color: inherit;
+}
+#floater> .floater-header:hover {
+	text-decoration: underline;
+}
+
+#floater> .floater-menu {
+	position: relative;
+	float: right;
+	border: none;
+	padding: 0 5px;
+	min-width: 1.5em;
+	
+	font-size: inherit;
+	line-height: inherit;
+	
+	background-color: transparent;
+	color: inherit;
+	outline: none;
+	opacity: 0.6;
+	cursor: pointer;
+	transition: opacity 0.3s;
+}
+#floater> .floater-menu:hover, #floater> .floater-menu:focus {
+	opacity: 1.0;
+}
+
+#floater> .floater-cascade {
+	position: absolute;
+	right: 0;
+	display: block;
+	box-sizing: border-box;
+	margin: 0;
+	min-width: 200px;
+	max-height: 40vh;
+	border-radius: 2px;
+	padding: 5px 10px;
+	overflow-y: auto;
+	
+	font-size: 0.9rem;
+	line-height: normal;
+	list-style-type: none;
+	
+	transform-origin: center top;
+	transform: scaleY(0.0);
+	opacity: 0.0;
+	box-shadow: var(--shadow);
+	background-color: var(--background-glass);
+	 -webkit-backdrop-filter: blur(2px);
+	backdrop-filter: blur(2px);
+	transition: opacity 0.3s, transform 0.3s;
+}
+#floater> .floater-menu:focus+ .floater-cascade, #floater> .floater-cascade:hover {
+	transform: scaleY(1.0);
+	opacity: 1.0;
+}
+
+#floater> .floater-cascade> * {
+	display: list-item;
+	margin: 0 -10px;
+	padding: 5px 10px;
+	cursor: pointer;
+	transition: background-color 0.3s;
+}
+#floater> .floater-cascade> *:hover {
+	background-color: var(--background-interface);
+}
+
+#floater> .floater-cascade> a {
+	text-decoration: none;
+	color: inherit;
+}
+
+#floater> .floater-cascade> hr {
+	margin-top: 5px;
+	margin-bottom: 5px;
+	border: none;
+	border-bottom: 1px solid var(--border-interface);
+	padding: 0;
+	cursor: inherit;
+}
+
+@media screen and (prefers-color-scheme: dark) {
+	#floater::before {
+		background-color: var(--background-interface);
+		background-image: none;
+	}
+}
+
+@media print {
+	#floater {
+		display: none;
+	}
+}
