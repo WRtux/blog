@@ -2,7 +2,7 @@
 	display: block;
 	margin: 0;
 	height: 100vh;
-	padding: 10px;
+	padding: 0;
 	overflow: hidden;
 	
 	 font-family: serif;
@@ -13,6 +13,11 @@
 	 color: #eef7ff;
 	color: var(--text-reverse);
 	text-shadow: var(--shadow-text);
+}
+
+#banner~ #wrapper {
+	 background-color: #f7f7f7;
+	background-color: var(--void);
 }
 
 #banner h1, #banner h2, #banner p, #banner hr {
@@ -69,7 +74,7 @@
 	background-size: cover;
 	transition: filter 0.5s;
 }
-#banner:active> .banner-background, #banner> .banner-focus:focus+ .banner-background {
+#banner:active> .banner-background, #banner> .banner-focus:focus~ .banner-background {
 	filter: brightness(0.8);
 }
 
@@ -84,6 +89,11 @@
 		height: 140vw;
 	}
 }
+@media print {
+	#banner {
+		display: none;
+	}
+}
 
 @media screen and (prefers-color-scheme: dark) {
 	#banner> .banner-background {
@@ -91,19 +101,18 @@
 	}
 }
 
-@media print {
-	#banner {
-		display: none;
-	}
-}
-
-#floater+ #banner {
+#floater~ #banner {
 	height: auto;
+	box-shadow: var(--shadow);
 }
-#floater+ #banner h1 {
+#floater~ #banner h1 {
 	margin-top: 20px;
 }
-#floater+ #banner> .banner-background {
+#floater~ #banner> .banner-background {
 	position: absolute;
 	height: 100%;
+}
+
+#floater~ #banner~ #wrapper {
+	background-color: transparent;
 }

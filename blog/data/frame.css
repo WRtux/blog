@@ -47,16 +47,16 @@ html {
 	}
 }
 
-body, #banner, #floater, #wrapper, article {
+body, #banner, #floater, #wrapper, article, iframe {
 	position: relative;
 	box-sizing: border-box;
 }
-
 body {
 	margin: 0;
 	 background-color: #f7f7f7;
 	background-color: var(--void);
 }
+
 body> * {
 	display: none;
 }
@@ -71,23 +71,22 @@ body> * {
 	font-family: var(--font-sans);
 	line-height: 1.4;
 	
-	 background-color: #f7f7f7;
-	background-color: var(--void);
 	 color: #223344;
 	color: var(--text-normal);
 }
+
 #wrapper> * {
 	display: none;
 }
 
-#wrapper> article {
+#wrapper> article, #wrapper> iframe {
 	display: block;
 	margin: 20px auto;
 	min-width: 70%;
 	width: 960px;
 	max-width: 95%;
-	border-radius: 2px;
-	padding: 10px;
+	border: none;
+	border-radius: 5px;
 	overflow: hidden;
 	
 	 background-color: #ffffff;

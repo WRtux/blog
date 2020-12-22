@@ -1,3 +1,6 @@
+article {
+	padding: 10px;
+}
 article> *:first-child {
 	margin-top: 5px;
 }
@@ -13,7 +16,7 @@ article h4, article h5, article h6 {
 	margin: 15px 0;
 	color: var(--text-aux);
 }
-article p, article hr, article ol, article ul, article blockquote, article pre, article code {
+article p, article hr, article ol, article ul, article blockquote, article pre, article code, article article {
 	margin: 15px 0;
 }
 
@@ -61,18 +64,18 @@ article li> ol, article li> ul {
 	margin-bottom: 5px;
 }
 
-article blockquote, article pre, article code {
+article blockquote, article pre, article code, article article {
 	border: 1px solid var(--border-normal);
 	border-radius: 5px;
 	padding: 5px 10px;
+	background-color: var(--background-mark);
 	box-shadow: var(--shadow);
 }
 
 article blockquote {
-	border-left: 5px solid var(--border-normal);
+	border-left-width: 5px;
 	 font-family: serif;
 	font-family: var(--font-serif);
-	background-color: var(--background-mark);
 }
 article blockquote> *:first-child {
 	margin-top: 5px;
@@ -96,13 +99,16 @@ article pre, article code {
 	color: var(--text-aux);
 }
 article code {
-	border-left: 25px solid var(--border-aux);
+	border-left-width: 25px;
 }
 
 article em {
 	font-weight: 500;
 }
 article strong {
+	font-weight: 700;
+}
+article em> strong, article strong> em {
 	font-weight: 800;
 }
 
@@ -145,7 +151,7 @@ article q::before, article q::after {
 }
 
 @media print {
-	article blockquote, article pre, article code {
+	article blockquote, article pre, article code, article article {
 		box-shadow: none;
 	}
 	article pre, article code {
