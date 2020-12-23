@@ -13,14 +13,14 @@ function fetchContent(url) {
 function fetchList(url) {
 	var res = fetchContent(url);
 	if (res.content) {
-		var doc = $.parseDOM(res);
+		var doc = $.parseDOM(res.content);
 		var eles = doc.getElementsByTagName("li"), lis = [];
 		for (var i = 0; i < eles.length; i++) {
 			var f = eles[i].children[0].textContent;
 			if (f.slice(-3) == ".md")
 				lis.push(f);
 		}
-		return lis;
+		return { status: res.status, list: lis };
 	} else
 		return res;
 }
@@ -76,7 +76,7 @@ function renderDirect(cont, url) {
 	} else {
 		$.removeChildren(cont);
 		cont.appendChild($.createElement("h2", "Failed: " + res.status));
-		return res;
+		return null;
 	}
 }
 

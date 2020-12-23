@@ -63,10 +63,10 @@ function interact(act) {
 
 (function () {
 	renderDirect("marked", url);
-	var lis = sortList(fetchList("/blog/"));
+	var lis = sortList(fetchList("/blog/").list);
 	for (var i = lis.length - 1; i >= lis.length - 3 && i >= 0; i--) {
 		var cont = $.createElement("article");
-		renderAbstract(cont, fetchContent("/blog/" + lis[i]));
+		renderAbstract(cont, fetchContent("/blog/" + lis[i]).content);
 		$.getElement("recent").appendChild(cont);
 	}
 })();
