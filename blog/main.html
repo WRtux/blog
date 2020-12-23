@@ -33,14 +33,14 @@
 </nav>
 
 <div id="wrapper">
- <article id="marked-main">
+ <article id="marked">
   <!-- Dynamic -->
   <h2>Loading</h2>
   <p>Markdown reader by Wilderness Ranger. <noscript>To run Marked renderer, please enable JavaScript.</noscript></p>
  </article>
- <article id="marked-about">
+ <article id="recent">
+  <h1>Recent</h1>
   <!-- Dynamic -->
-  <h2>Loading</h2>
  </article>
 </div>
 
@@ -56,14 +56,19 @@ function interact(act) {
 		break;
 	case "dark":
 	case 'D':
-		document.body.appendChild(createDark());
+		switchDark();
 		break;
 	}
 }
 
 (function () {
-	renderDirect("marked-main", url);
-	renderDirect("marked-about", "/about.md");
+	renderDirect("marked", url);
+	var lis = sortList(fetchList("/blog/"));
+	for (var i = lis.length - 1; i >= lis.length - 3 && i >= 0; i--) {
+		var cont = $.createElement("article");
+		renderDirect(cont, "/blog/" + lis[i]);
+		$.getElement("recent").appendChild(cont);
+	}
 })();
 
 </script>

@@ -35,6 +35,7 @@
 <script src="/data/reader.min.js"></script>
 <script type="text/javascript">"use strict";
 var url = location.pathname;
+url = url.replace(new RegExp("^/list/(?=.+/)"), "/project/");
 url = url.replace(new RegExp("^/list/"), "/blog/");
 url += ".md";
 
@@ -46,7 +47,7 @@ function interact(act) {
 		break;
 	case "dark":
 	case 'D':
-		document.body.appendChild(createDark());
+		switchDark();
 		break;
 	}
 }
