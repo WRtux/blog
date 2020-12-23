@@ -1,20 +1,28 @@
 "use strict";
 
-function fetchList(url) {
+function fetchContent(url) {
 	var xhr = new XMLHttpRequest();
 	xhr.open("GET", url, false);
 	xhr.send();
-	if (xhr.status >= 200 && xhr.status < 300) {
-		var doc = $.parseDOM(xhr.responseText);
-		var lis = doc.getElementsByTagName("li"), res = [];
-		for (var i = 0; i < lis.length; i++) {
-			var f = lis[i].children[0].textContent;
+	if (xhr.status >= 200 && xhr.status < 300)
+		return { status: xhr.status, content: xhr.responseText };
+	else
+		return { status: xhr.status };
+}
+
+function fetchList(url) {
+	var res = fetchContent(url);
+	if (res.content) {
+		var doc = $.parseDOM(res);
+		var eles = doc.getElementsByTagName("li"), lis = [];
+		for (var i = 0; i < eles.length; i++) {
+			var f = eles[i].children[0].textContent;
 			if (f.slice(-3) == ".md")
-				res.push(f);
+				lis.push(f);
 		}
-		return res;
+		return lis;
 	} else
-		return null;
+		return res;
 }
 
 function sortList(lis) {
@@ -61,21 +69,21 @@ function renderAbstract(cont, md, lns) {
 function renderDirect(cont, url) {
 	if (typeof cont == "string")
 		cont = $.getElement(cont);
-	var xhr = new XMLHttpRequest();
-	xhr.open("GET", url, false);
-	xhr.send();
-	if (xhr.status >= 200 && xhr.status < 300) {
+	var res = fetchContent(url);
+	if (res.content) {
 		marked.setOptions({ nested: false });
-		return cont.innerHTML = marked(xhr.responseText);
+		return cont.innerHTML = marked(res.content);
 	} else {
 		$.removeChildren(cont);
-		cont.appendChild($.createElement("h2", "Failed: " + xhr.status));
-		return null;
+		cont.appendChild($.createElement("h2", "Failed: " + res.status));
+		return res;
 	}
 }
 
 var dark;
 function createDark() {
+	if (dark)
+		return null;
 	var ele = $.createElement("style");
 	var stys = $.forTagName("link")[0].sheet;
 	var ruls = stys.cssRules, txtRul = "";

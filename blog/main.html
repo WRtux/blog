@@ -66,7 +66,7 @@ function interact(act) {
 	var lis = sortList(fetchList("/blog/"));
 	for (var i = lis.length - 1; i >= lis.length - 3 && i >= 0; i--) {
 		var cont = $.createElement("article");
-		renderDirect(cont, "/blog/" + lis[i]);
+		renderAbstract(cont, fetchContent("/blog/" + lis[i]));
 		$.getElement("recent").appendChild(cont);
 	}
 })();

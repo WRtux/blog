@@ -5,6 +5,7 @@ var $ = {
 	getElement: function (id) {
 		return document.getElementById(id);
 	},
+	
 	getStyle: function (ele) {
 		if (typeof ele == "string")
 			return this.getElement(ele).style;
@@ -17,6 +18,7 @@ var $ = {
 	forTagName: function (n) {
 		return document.getElementsByTagName(n);
 	},
+	
 	forClassName: function (n) {
 		return document.getElementsByClassName(n);
 	},
@@ -31,6 +33,7 @@ var $ = {
 			ele = this.getElement(ele);
 		return ele.className.search(this.getClassExp(cls)) != -1;
 	},
+	
 	setClass: function (ele, cls) {
 		if (typeof ele == "string")
 			ele = this.getElement(ele);
@@ -40,6 +43,7 @@ var $ = {
 		} else
 			return false;
 	},
+	
 	removeClass: function (ele, cls) {
 		var regex = this.getClassExp(cls);
 		if (typeof ele == "string")
@@ -71,6 +75,7 @@ var $ = {
 			ele = this.getElement(ele);
 		return ele.parentNode.removeChild(ele);
 	},
+	
 	removeChildren: function (ele) {
 		if (typeof ele == "string")
 			ele = this.getElement(ele);
