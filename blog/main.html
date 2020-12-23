@@ -44,38 +44,9 @@
  </article>
 </div>
 
+<script src="/data/reader.min.js"></script>
 <script type="text/javascript">"use strict";
 var url = "/main.md";
-
-function createDark() {
-	var ele = $.createElement("style");
-	var stys = $.forTagName("link")[0].sheet;
-	var ruls = stys.cssRules, txtRul = "";
-	for (var i = 0; i < ruls.length; i++) {
-		var rul = ruls[i];
-		if (rul instanceof CSSMediaRule && rul.conditionText.indexOf("dark") != -1) {
-			rul = rul.cssRules;
-			for (var j = 0; j < rul.length; j++)
-				txtRul += rul[j].cssText;
-			stys.removeRule(i--);
-		}
-	}
-	ele.textContent = txtRul;
-	return ele;
-}
-
-function renderDirect(id, url) {
-	var cont = $.getElement(id);
-	var xhr = new XMLHttpRequest();
-	xhr.open("GET", url, false);
-	xhr.send();
-	if (xhr.status >= 200 && xhr.status < 300)
-		cont.innerHTML = marked(xhr.responseText);
-	else {
-		$.removeChildren(cont);
-		cont.appendChild($.createElement("h2", "Failed to render: " + xhr.status));
-	}
-}
 
 function interact(act) {
 	switch(act) {
