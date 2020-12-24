@@ -12,14 +12,6 @@
  <link rel="stylesheet" href="/data/prism.css" />
 </head><body>
 
-<header id="banner">
- <h1>Wilderness<br />Ranger</h1>
- <p>Subsisting for now, coding for dreams, innovating forever.</p>
- <hr />
- <input type="text" class="banner-focus" placeholder="Search" />
- <div class="banner-background" style="background-image: url(/res/main/train-mountain.jpg);"></div>
-</header>
-
 <nav id="floater">
  <img class="floater-avatar" src="/data/avatar.png" /><a class="floater-header" href="/main">Wilderness Ranger</a>
  <button class="floater-menu icon" title="Settings">⚙</button><ul class="floater-cascade">
@@ -32,28 +24,27 @@
  </ul>
 </nav>
 
+<header id="banner">
+ <h1>Blog List</h1>
+ <hr />
+ <input type="text" class="banner-focus" placeholder="Search" />
+ <div class="banner-background" style="background-image: url(/res/main/train-mountain.jpg);"></div>
+</header>
+
 <div id="wrapper">
- <article id="marked">
-  <!-- Dynamic -->
+ <!-- Dynamic -->
+ <article>
   <h2>Loading</h2>
   <p>Markdown reader by Wilderness Ranger. <noscript>To run Marked renderer, please enable JavaScript.</noscript></p>
- </article>
- <article id="recent">
-  <h1>Recent</h1>
-  <!-- Dynamic -->
  </article>
 </div>
 
 <script src="/data/reader.min.js"></script>
 <script type="text/javascript">"use strict";
-var url = "/main.md";
+var url = "/blog/";
 
 function interact(act) {
 	switch(act) {
-	case "markdown":
-	case 'M':
-		window.open(url);
-		break;
 	case "dark":
 	case 'D':
 		switchDark();
@@ -62,15 +53,16 @@ function interact(act) {
 }
 
 (function () {
-	renderDirect("marked", url);
-	var lis = sortList(fetchList("/blog/").list);
-	for (var i = lis.length - 1; i >= lis.length - 3 && i >= 0; i--) {
+	var w = $.getElement("wrapper");
+	var lis = sortList(fetchList(url).list);
+	$.removeChildren(w);
+	for (var i = 0; i < lis.length; i++) {
 		var cont = $.createElement("article");
-		renderAbstract(cont, fetchContent("/blog/" + lis[i]).content);
+		renderAbstract(cont, fetchContent(url + lis[i]).content);
 		$.setClass(cont, "marked-abstract");
-		cont.setAttribute("href", "/list/" + lis[i].slice(0, -3));
+		cont.setAttribute("href", location.pathname + "/" + lis[i].slice(0, -3));
 		cont.onclick = function () { location.assign(this.getAttribute("href")); };
-		$.getElement("recent").appendChild(cont);
+		w.appendChild(cont);
 	}
 })();
 
