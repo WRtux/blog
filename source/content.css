@@ -18,6 +18,7 @@ article> *:last-child {
 article.marked-abstract {
 	min-height: 100px;
 	max-height: 50vh;
+	font-size: 90%;
 	cursor: pointer;
 }
 article article.marked-abstract {
@@ -42,6 +43,12 @@ article h1, article h2 {
 	padding-bottom: 2px;
 	word-break: break-all;
 }
+
+article.marked-abstract h1, article.marked-abstract h2 {
+	overflow: hidden;
+	white-space: nowrap;
+}
+
 article h1 {
 	margin-left: -10px;
 	border-left: 5px solid var(--text-aux);
