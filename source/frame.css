@@ -33,14 +33,15 @@ html {
 		--background-normal: #1a1a22;
 		--background-glass: #1a1a2266;
 		--background-interface: #222222;
-		
+		--background-mark: #222233;
+		--background-aux: #1a2b33;
 		--border-normal: #663399;
 		--border-interface: #555555;
-		
+		--border-aux: #884488;
 		--text-normal: #cccccc;
 		--text-interface: #eeeeee;
-		--text-mark: #cc66ff;
-		--text-aux: #cc66cc;
+		--text-mark: #aa55ff;
+		--text-aux: #cc66ff;
 		--text-reverse: #eeeeee;
 		--shadow: 1px 1px 0 #11112233;
 		--shadow-text: none;
