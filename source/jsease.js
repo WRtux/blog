@@ -23,7 +23,7 @@ var $ = {
 		return document.getElementsByClassName(n);
 	},
 	
-	classPattern: /(?<=^|\s)class(?:$|\s+)/g.source,
+	classPattern: /(?:^|\s)class(?=$|\s+)/g.source,
 	getClassExp: function (cls) {
 		return new RegExp(this.classPattern.replace("class", cls.trim()), "g");
 	},
