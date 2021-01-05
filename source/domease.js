@@ -3,35 +3,30 @@
 (function () {
 	var proto = Document.prototype;
 	
-	proto.queryId = proto.getElement = function (id) {
-		return this.getElementById(id);
+	proto.getElement = function (ele) {
+		if (typeof ele == "string")
+			return this.getElementById(ele);
+		else if (ele instanceof Element)
+			return ele;
+		else if (typeof ele == "undefined")
+			return this.firstElementChild;
+		else
+			throw new TypeError();
 	};
 	
 	HTMLDocument.prototype.getStyle = function (ele) {
-		if (typeof ele == "string")
-			return this.getElement(ele).style;
-		else if (ele instanceof HTMLElement)
-			return ele.style;
-		else
-			throw new TypeError();
+		return this.getElement(ele).style;
 	};
 	
 	proto.getInner = function (ele) {
-		if (typeof ele == "string")
-			return this.getElement(ele).innerHTML;
-		else if (ele instanceof Element)
-			return ele.innerHTML;
-		else
-			throw new TypeError();
+		return this.getElement(ele).innerHTML;
 	};
 	
-	proto.queryTagName = function (n) {
-		return this.getElementsByTagName(n);
-	};
+	proto.queryId = proto.getElementById;
 	
-	proto.queryClassName = function (n) {
-		return this.getElementsByClassName(n);
-	};
+	proto.queryTagName = proto.getElementsByTagName;
+	
+	proto.queryClassName = proto.getElementsByClassName;
 	
 	var classPattern = /(?:^|\s)class(?=$|\s+)/g.source;
 	var getClassExp = function (cls) {
@@ -39,14 +34,12 @@
 	};
 	
 	proto.testClass = function (ele, cls) {
-		if (typeof ele == "string")
-			ele = this.getElement(ele);
+		ele = this.getElement(ele);
 		return ele.className.search(getClassExp(cls)) != -1;
 	};
 	
 	proto.setClass = function (ele, cls) {
-		if (typeof ele == "string")
-			ele = this.getElement(ele);
+		ele = this.getElement(ele);
 		if (!this.testClass(ele, cls)) {
 			ele.className += " " + cls;
 			return true;
@@ -55,8 +48,7 @@
 	};
 	
 	proto.removeClass = function (ele, cls) {
-		if (typeof ele == "string")
-			ele = this.getElement(ele);
+		ele = this.getElement(ele);
 		var regex = getClassExp(cls);
 		if (ele.className.search(regex) != -1) {
 			ele.className = ele.className.replace(regex, "");
@@ -81,14 +73,12 @@
 	};
 	
 	proto.removeElement = function (ele) {
-		if (typeof ele == "string")
-			ele = this.getElement(ele);
+		ele = this.getElement(ele);
 		return ele.parentNode.removeChild(ele);
 	};
 	
 	proto.removeChildren = function (ele) {
-		if (typeof ele == "string")
-			ele = this.getElement(ele);
+		ele = this.getElement(ele);
 		var len = ele.childNodes.length;
 		while (ele.hasChildNodes())
 			ele.removeChild(ele.lastChild);
@@ -96,8 +86,9 @@
 	};
 	
 	var eleproto = Element.prototype;
-	eleproto.queryTagName = proto.queryTagName;
-	eleproto.queryClassName = proto.queryClassName;
+	eleproto.getElement = function () { return this; };
+	eleproto.queryTagName = eleproto.getElementsByTagName;
+	eleproto.queryClassName = eleproto.getElementsByClassName;
 	eleproto.testClass = function (cls) {
 		return proto.testClass(this, cls);
 	};
