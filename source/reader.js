@@ -13,10 +13,10 @@ function fetchContent(url) {
 function fetchList(url) {
 	var res = fetchContent(url);
 	if (res.content) {
-		var doc = $.parseDOM(res.content);
-		var eles = doc.getElementsByTagName("li"), lis = [];
+		var doc = parseDOM(res.content);
+		var eles = doc.queryTagName("li"), lis = [];
 		for (var i = 0; i < eles.length; i++) {
-			var f = eles[i].children[0].textContent;
+			var f = eles[i].firstElementChild.textContent;
 			if (f.slice(-3) == ".md")
 				lis.push(f);
 		}
@@ -42,14 +42,12 @@ function sortList(lis) {
 }
 
 function render(cont, md) {
-	if (typeof cont == "string")
-		cont = $.getElement(cont);
+	cont = document.getElement(cont);
 	marked.setOptions({ nested: false });
 	return cont.innerHTML = marked(md);
 }
 function renderAbstract(cont, md, lns) {
-	if (typeof cont == "string")
-		cont = $.getElement(cont);
+	cont = document.getElement(cont);
 	if (!lns)
 		lns = 3;
 	var pos = 0;
@@ -67,15 +65,14 @@ function renderAbstract(cont, md, lns) {
 }
 
 function renderDirect(cont, url) {
-	if (typeof cont == "string")
-		cont = $.getElement(cont);
+	cont = document.getElement(cont);
 	var res = fetchContent(url);
 	if (res.content) {
 		marked.setOptions({ nested: false });
 		return cont.innerHTML = marked(res.content);
 	} else {
-		$.removeChildren(cont);
-		cont.appendChild($.createElement("h2", "Failed: " + res.status));
+		cont.removeChildren();
+		cont.appendChild(document.buildElement("h2", "Failed: " + res.status));
 		return null;
 	}
 }
@@ -84,8 +81,8 @@ var dark;
 function createDark() {
 	if (dark)
 		return null;
-	var ele = $.createElement("style");
-	var stys = $.forTagName("link")[0].sheet;
+	var ele = document.createElement("style");
+	var stys = document.queryTagName("link")[0].sheet;
 	var ruls = stys.cssRules, txtRul = "";
 	for (var i = 0; i < ruls.length; i++) {
 		var rul = ruls[i];
@@ -102,11 +99,11 @@ function createDark() {
 }
 
 function switchDark() {
-	if (!dark || dark.id == "dark") {
-		document.body.appendChild(dark || createDark());
+	if (!dark || dark instanceof HTMLStyleElement) {
+		document.head.appendChild(dark || createDark());
 		return dark = true;
 	} else {
-		dark = $.removeElement($.getElement("dark"));
+		dark = document.removeElement("dark");
 		return false;
 	}
 }
