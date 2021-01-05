@@ -5,7 +5,6 @@
  <title>Loading - Wilderness Ranger</title>
  <link rel="stylesheet" href="/data/main.min.css" />
  <link rel="stylesheet" href="/data/font/icons.css" />
- <script src="/data/jsease.min.js"></script>
  <script src="/data/marked.min.js"></script>
  <script src="//cdn.jsdelivr.net/npm/prismjs@1.22/components/prism-core.min.js"></script>
  <script src="//cdn.jsdelivr.net/npm/prismjs@1.22/plugins/autoloader/prism-autoloader.min.js"></script>
@@ -44,7 +43,7 @@
  </article>
 </main>
 
-<script src="/data/reader.min.js"></script>
+<script src="/data/main.min.js"></script>
 <script type="text/javascript">"use strict";
 var url = "/main.md";
 
@@ -65,12 +64,12 @@ function interact(act) {
 	renderDirect("marked", url);
 	var lis = sortList(fetchList("/blog/").list);
 	for (var i = lis.length - 1; i >= lis.length - 3 && i >= 0; i--) {
-		var cont = $.createElement("article");
+		var cont = document.createElement("article");
 		renderAbstract(cont, fetchContent("/blog/" + lis[i]).content);
-		$.setClass(cont, "marked-abstract");
+		cont.setClass("marked-abstract");
 		cont.setAttribute("href", "/list/" + lis[i].slice(0, -3));
 		cont.onclick = function () { location.assign(this.getAttribute("href")); };
-		$.getElement("recent").appendChild(cont);
+		document.queryId("recent").appendChild(cont);
 	}
 })();
 
