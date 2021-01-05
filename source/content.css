@@ -192,3 +192,15 @@ article q::before, article q::after {
 		word-break: break-all;
 	}
 }
+
+@media screen and (prefers-color-scheme: dark) {
+	article blockquote, article pre, article code, article article {
+		border-width: 0;
+	}
+	article blockquote, article article {
+		border-left-width: 5px;
+	}
+	article code {
+		border-left-width: 25px;
+	}
+}
