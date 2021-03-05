@@ -1,10 +1,15 @@
-<IfModule mod_rewrite.c>
-RewriteEngine On
-RewriteBase /
+Options +Indexes
+IndexOptions Charset=UTF-8
+IndexOptions -FancyIndexing
 
-RewriteCond %{HTTP_REFERER} !blog.wrtux.top [NC]
-RewriteRule ^$ /main [R=302]
-RewriteRule ^index.html$ /main [R=301]
+RewriteEngine On
+
+RewriteCond %{HTTP_HOST} !^blog\.wrtux\.top$ [NC]
+RewriteRule ^ - [F,L]
+
+RewriteCond %{HTTP_REFERER} !//blog\.wrtux\.top [NC]
+RewriteRule ^$ /main [R=302,L]
+RewriteRule ^index\.html?$ /main [R=301,L]
 
 RewriteRule ^main$ /main.html
 
@@ -14,14 +19,7 @@ RewriteRule ^project$ /view.html
 RewriteRule ^list$ /list.html
 RewriteRule ^list/ /view.html
 
-RewriteRule ^draft/ - [F]
-
-Options Indexes
-IndexOptions Charset=UTF-8
-
-IndexOptions -FancyIndexing
+RewriteRule ^draft/ - [F,L]
 
 ErrorDocument 403 /data/403.html
 ErrorDocument 404 /data/404.html
-
-</IfModule>
