@@ -1,10 +1,42 @@
+<!DOCTYPE html>
+
 <html><head>
  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.5, user-scalable=yes" />
  <title>403 Forbidden</title>
- <link rel="stylesheet" href="/data/marked.css" />
+ <link rel="stylesheet" href="/data/main.min.css" />
+ <link rel="stylesheet" href="/data/font/icons.css" />
 </head><body>
- <div id="wrapper">
+
+<nav id="floater">
+ <img class="floater-avatar" src="/data/avatar.png" /><a class="floater-header" href="/main">Wilderness Ranger</a>
+ <button class="floater-menu icon" title="Settings">⚙</button><ul class="floater-cascade">
+  <a class="icon-list" onclick="interact('M');">Markdown</a>
+  <hr />
+  <a class="icon-moon" onclick="interact('D');">Auto</a>
+ </ul>
+ <button class="floater-menu icon" title="Information">i</button><ul class="floater-cascade">
+  <a href="https://github.com/WRtux/blog">Version 0.3</a>
+ </ul>
+</nav>
+
+<main id="wrapper">
+ <article>
   <h1>403 Forbidden</h1>
   <p>Woah.</p>
- </div>
+ </article>
+</main>
+
+<script src="/data/main.min.js"></script>
+<script type="text/javascript">"use strict";
+
+function interact(act) {
+	switch(act) {
+	case "dark":
+	case 'D':
+		switchDark();
+		break;
+	}
+}
+
+</script>
 </body></html>
