@@ -1,8 +1,12 @@
-# Draft
+# Actual blogs and media
+/blog/*.md
+/blog/blog/
 /blog/draft/
+/blog/project/
+/blog/media/
 
-# Archived files
-/file/
+# Backup files
+/backup/
 
 # Security related (SSL certificates, private keys, etc.)
 /security/

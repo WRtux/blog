@@ -11,13 +11,13 @@ RewriteCond %{HTTP_REFERER} !//blog\.wrtux\.top [NC]
 RewriteRule ^$ /main [R=302,L]
 RewriteRule ^index\.html?$ /main [R=301,L]
 
-RewriteRule ^main$ /main.html
+RewriteRule ^main$ /data/main.html
 
-RewriteRule ^about$ /view.html
-RewriteRule ^project$ /view.html
+RewriteRule ^about$ /data/view.html
+RewriteRule ^project$ /data/view.html
 
-RewriteRule ^list$ /list.html
-RewriteRule ^list/ /view.html
+RewriteRule ^list$ /data/list.html
+RewriteRule ^list/ /data/view.html
 
 RewriteRule ^draft/ - [F,L]
 
