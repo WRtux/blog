@@ -1,3 +1,4 @@
+/* Article block */
 article {
 	padding: 10px;
 	
@@ -15,6 +16,7 @@ article> *:last-child {
 	margin-bottom: 5px;
 }
 
+/* Article abstract */
 article.marked-abstract {
 	min-height: 100px;
 	max-height: 50vh;
@@ -29,33 +31,41 @@ article article.marked-abstract {
 	max-height: 40vh;
 }
 
+/* Article element margins */
 article h1, article h2, article h3 {
 	margin: 20px 0;
-	color: var(--text-mark);
 }
-article h4, article h5, article h6 {
-	margin: 15px 0;
-	color: var(--text-aux);
-}
+article h4, article h5, article h6,
 article p, article ol, article ul, article hr, article progress, article blockquote, article pre, article code, article article {
 	margin: 15px 0;
 }
 
+/* Title elements */
+article h1, article h2, article h3 {
+	color: var(--text-mark);
+}
+article h4, article h5, article h6 {
+	color: var(--text-aux);
+}
+article h1 {
+	margin-left: -10px;
+	border-left: 5px solid var(--text-aux);
+	padding-left: 5px;
+}
 article h1, article h2 {
 	border-bottom: 1px solid var(--border-normal);
 	padding-bottom: 2px;
 	word-break: break-all;
 }
-
 article.marked-abstract h1, article.marked-abstract h2 {
 	overflow: hidden;
 	white-space: nowrap;
 }
+article h5, article h6 {
+	font-weight: 500;
+}
 
 article h1 {
-	margin-left: -10px;
-	border-left: 5px solid var(--text-aux);
-	padding-left: 5px;
 	font-size: 1.8em;
 }
 article h2 {
@@ -69,9 +79,9 @@ article h4 {
 }
 article h5, article h6 {
 	font-size: 1.1em;
-	font-weight: 500;
 }
 
+/* List elements */
 article ol, article ul {
 	padding-left: 25px;
 }
@@ -80,6 +90,7 @@ article li> ol, article li> ul {
 	margin-bottom: 5px;
 }
 
+/* Block-level article elements */
 article hr {
 	margin-left: -10px;
 	margin-right: -10px;
@@ -135,6 +146,7 @@ article code {
 	font-size: 90%;
 }
 
+/* Inline article elements */
 article em {
 	font-weight: 500;
 }
