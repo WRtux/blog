@@ -21,5 +21,8 @@ RewriteRule ^list/ /data/view.html
 
 RewriteRule ^draft/ - [F,L]
 
-ErrorDocument 403 /data/403.html
-ErrorDocument 404 /data/404.html
+ErrorDocument 400 /data/error.shtml?400
+ErrorDocument 401 /data/error.shtml?401
+ErrorDocument 403 /data/error.shtml?403
+ErrorDocument 404 /data/error.shtml?404
+ErrorDocument 500 /data/error.shtml?500
