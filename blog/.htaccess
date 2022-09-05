@@ -1,15 +1,10 @@
-Options +Indexes
-IndexOptions Charset=UTF-8
-IndexOptions -FancyIndexing
-
 RewriteEngine On
 
 RewriteCond %{HTTP_HOST} !^blog\.wrtux\.top$ [NC]
-RewriteRule ^ - [F,L]
+RewriteRule ^ - [F,END]
 
-RewriteCond %{HTTP_REFERER} !//blog\.wrtux\.top [NC]
+RewriteCond %{HTTP_REFERER} !//(?:[^/]+\.)?wrtux\.top(?:/|$) [NC]
 RewriteRule ^$ /main [R=302,L]
-RewriteRule ^index\.html?$ /main [R=301,L]
 
 RewriteRule ^main$ /data/main.html
 
@@ -19,10 +14,12 @@ RewriteRule ^project$ /data/view.html
 RewriteRule ^list$ /data/list.html
 RewriteRule ^list/ /data/view.html
 
-RewriteRule ^draft/ - [F,L]
-
 ErrorDocument 400 /data/error.shtml?400
 ErrorDocument 401 /data/error.shtml?401
 ErrorDocument 403 /data/error.shtml?403
 ErrorDocument 404 /data/error.shtml?404
 ErrorDocument 500 /data/error.shtml?500
+
+Options +Indexes
+IndexOptions Charset=UTF-8
+IndexOptions -FancyIndexing
