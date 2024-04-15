@@ -3,24 +3,16 @@
 <html><head>
  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.5, user-scalable=yes" />
  <title>Loading - Wilderness Ranger</title>
- <link rel="stylesheet" href="/data/main.min.css" />
- <link rel="stylesheet" href="/data/font/icons.css" />
- <script src="/data/marked.min.js"></script>
+ <link rel="stylesheet" href="/web/main.min.css" />
+ <link rel="stylesheet" href="/web/font/icons.css" />
+ <script src="/web/marked.min.js"></script>
  <script src="//cdn.jsdelivr.net/npm/prismjs@1.22/components/prism-core.min.js"></script>
  <script src="//cdn.jsdelivr.net/npm/prismjs@1.22/plugins/autoloader/prism-autoloader.min.js"></script>
- <link rel="stylesheet" href="/data/prism.css" />
+ <link rel="stylesheet" href="/web/prism.css" />
 </head><body>
 
-<header id="banner">
- <h1>Wilderness<br />Ranger</h1>
- <p>Subsisting for now, coding for dreams, innovating forever.</p>
- <hr />
- <input type="text" class="banner-focus" placeholder="Search" />
- <div class="banner-background" style="background-image: url(/media/main/train-mountain.jpg);"></div>
-</header>
-
 <nav id="floater">
- <img class="floater-avatar" src="/data/avatar.png" /><a class="floater-header" href="/main">Wilderness Ranger</a>
+ <img class="floater-avatar" src="/web/avatar.png" /><a class="floater-header" href="/main">Wilderness Ranger</a>
  <button class="floater-menu icon" title="Settings">⚙</button><ul class="floater-cascade">
   <a class="icon-list" onclick="interact('M');">Markdown</a>
   <hr />
@@ -37,15 +29,14 @@
   <h2>Loading</h2>
   <p>Markdown reader by Wilderness Ranger. <noscript>To run Marked renderer, please enable JavaScript.</noscript></p>
  </article>
- <article id="recent">
-  <h1>Recent</h1>
-  <!-- Dynamic -->
- </article>
 </main>
 
-<script src="/data/main.min.js"></script>
+<script src="/web/main.min.js"></script>
 <script type="text/javascript">"use strict";
-var url = "/main.md";
+var url = location.pathname;
+url = url.replace(new RegExp("^/list/(?=.+/)"), "/project/");
+url = url.replace(new RegExp("^/list/"), "/blog/");
+url += ".md";
 
 function interact(act) {
 	switch(act) {
@@ -62,15 +53,6 @@ function interact(act) {
 
 (function () {
 	renderDirect("marked", url);
-	var lis = sortList(fetchList("/blog/").list);
-	for (var i = lis.length - 1; i >= lis.length - 3 && i >= 0; i--) {
-		var cont = document.createElement("article");
-		renderAbstract(cont, fetchContent("/blog/" + lis[i]).content);
-		cont.setClass("marked-abstract");
-		cont.setAttribute("href", "/list/" + lis[i].slice(0, -3));
-		cont.onclick = function () { location.assign(this.getAttribute("href")); };
-		document.queryId("recent").appendChild(cont);
-	}
 })();
 
 </script>

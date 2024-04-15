@@ -16,12 +16,12 @@
 <html><head>
  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.5, user-scalable=yes" />
  <title><!--#echo var="TITLE" --></title>
- <link rel="stylesheet" href="/data/main.min.css" />
- <link rel="stylesheet" href="/data/font/icons.css" />
+ <link rel="stylesheet" href="/web/main.min.css" />
+ <link rel="stylesheet" href="/web/font/icons.css" />
 </head><body>
 
 <nav id="floater">
- <img class="floater-avatar" src="/data/avatar.png" /><a class="floater-header" href="/main">Wilderness Ranger</a>
+ <img class="floater-avatar" src="/web/avatar.png" /><a class="floater-header" href="/main">Wilderness Ranger</a>
  <button class="floater-menu icon" title="Settings">⚙</button><ul class="floater-cascade">
   <a class="icon-list" onclick="interact('M');">Markdown</a>
   <hr />
@@ -39,7 +39,7 @@
  </article>
 </main>
 
-<script src="/data/main.min.js"></script>
+<script src="/web/main.min.js"></script>
 <script type="text/javascript">"use strict";
 
 function interact(act) {
