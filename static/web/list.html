@@ -5,7 +5,6 @@
  <title>Loading - Wilderness Ranger</title>
  <link rel="stylesheet" href="/web/main.min.css" />
  <link rel="stylesheet" href="/web/font/icons.css" />
- <script src="/web/marked.min.js"></script>
  <script src="//cdn.jsdelivr.net/npm/prismjs@1.22/components/prism-core.min.js"></script>
  <script src="//cdn.jsdelivr.net/npm/prismjs@1.22/plugins/autoloader/prism-autoloader.min.js"></script>
  <link rel="stylesheet" href="/web/prism.css" />
@@ -19,7 +18,7 @@
   <a class="icon-moon" onclick="interact('D');">Auto</a>
  </ul>
  <button class="floater-menu icon" title="Information">i</button><ul class="floater-cascade">
-  <a href="https://github.com/WRtux/blog">Version 0.3</a>
+  <a href="https://github.com/WRtux/blog">Version 0.4</a>
  </ul>
 </nav>
 
@@ -38,6 +37,8 @@
  </article>
 </main>
 
+<script src="/web/marked.min.js"></script>
+
 <script src="/web/main.min.js"></script>
 <script type="text/javascript">"use strict";
 var url = "/blog/";
@@ -51,6 +52,7 @@ function interact(act) {
 	}
 }
 
+/*
 (function () {
 	var w = document.queryId("wrapper");
 	var lis = sortList(fetchList(url).list);
@@ -64,6 +66,33 @@ function interact(act) {
 		w.appendChild(cont);
 	}
 })();
+*/
+void async function () {
+	let wrap = document.getElementById('wrapper');
+	let f = false;
+	function append(el) {
+		if (!f) {
+			wrap.removeChildren();
+			f = true;
+		}
+		wrap.appendChild(el);
+	}
+	try {
+		let li = await fetchArticleList('/blog/meta.xml');
+		for (let en of li.reverse()) {
+			let cont = document.createElement('article');
+			cont.classList.add('marked-abstract');
+			cont.setAttribute('href', '/list/' + en.fileName);
+			cont.addEventListener('click', (e) => location.assign(e.currentTarget.getAttribute('href')));
+			await renderURL(cont, '/blog/' + en.fileName, {abstract: true});
+			append(cont);
+		}
+	} catch (err) {
+		let cont = document.createElement('article');
+		cont.appendChild(buildFailure(err));
+		append(cont);
+	}
+}();
 
 </script>
 </body></html>

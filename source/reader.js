@@ -25,20 +25,36 @@ function fetchList(url) {
 		return res;
 }
 
+async function fetchText(url) {
+	let resp = await fetch(url, {method: 'GET'});
+	if (!resp.ok)
+		throw new Error(`Request responded with status ${resp.status}`);
+	return await resp.text();
+}
+
+async function fetchArticleList(url) {
+	let resp = await fetch(url, {method: 'GET'});
+	if (!resp.ok)
+		throw new Error(`Article list responded with status ${resp.status}`);
+	let doc = new DOMParser().parseFromString(await resp.text(), "text/xml");
+	let cont = doc.getElementsByTagName('article-list')[0];
+	if (cont == null)
+		throw new Error('No article lists found.');
+	let li = new Array();
+	for (let el of cont.getElementsByTagName('article')) {
+		let en = {
+			fileName: el.getAttribute('file'),
+			archive: el.getElementsByTagName('archive')[0]?.textContent,
+			category: el.getElementsByTagName('category')[0]?.textContent,
+			keywords: Array.from(el.getElementsByTagName('keyword')).map((el) => el.textContent)
+		};
+		li.push(en);
+	}
+	return li;
+}
+
 function sortList(lis) {
-	return lis.sort(function (a, b) {
-		var regex = /^([0-9]{8})-([0-9]+)/;
-		var resa = a.match(regex), resb = b.match(regex);
-		if (resa && resb) {
-			var al = a[1], bl = b[1], ar = a[2], br = b[2];
-			return (al - bl) || (ar - br);
-		} else if (resa)
-			return 1;
-		else if (resb)
-			return -1;
-		else
-			return a.localeCompare(b);
-	});
+	return lis;
 }
 
 function render(cont, md) {
@@ -75,6 +91,39 @@ function renderDirect(cont, url) {
 		cont.appendChild(document.buildElement("h2", "Failed: " + res.status));
 		return null;
 	}
+}
+
+function buildArticle(md, opt = {}) {
+	let tmpl = document.createElement('template');
+	marked.setOptions({nested: false});
+	tmpl.innerHTML = marked(md);
+	let frg = tmpl.content;
+	if (opt.abstract == true) {
+		while (frg.childElementCount > 4) {
+			frg.lastChild.remove();
+		}
+	}
+	return frg;
+}
+
+function buildFailure(err) {
+	let frg = document.createDocumentFragment();
+	frg.appendChild(document.buildElement('h2', 'Failed to render article'));
+	frg.appendChild(document.buildElement('span', err?.toString() ?? 'Unknown error.'));
+	return frg;
+}
+
+async function renderURL(cont, url, opt = {}) {
+	cont = document.getElement(cont);
+	let art;
+	try {
+		let md = await fetchText(url);
+		art = buildArticle(md, opt);
+	} catch (err) {
+		art = buildFailure(err);
+	}
+	cont.removeChildren();
+	cont.appendChild(art);
 }
 
 var dark;

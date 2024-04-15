@@ -5,7 +5,6 @@
  <title>Loading - Wilderness Ranger</title>
  <link rel="stylesheet" href="/web/main.min.css" />
  <link rel="stylesheet" href="/web/font/icons.css" />
- <script src="/web/marked.min.js"></script>
  <script src="//cdn.jsdelivr.net/npm/prismjs@1.22/components/prism-core.min.js"></script>
  <script src="//cdn.jsdelivr.net/npm/prismjs@1.22/plugins/autoloader/prism-autoloader.min.js"></script>
  <link rel="stylesheet" href="/web/prism.css" />
@@ -27,7 +26,7 @@
   <a class="icon-moon" onclick="interact('D');">Auto</a>
  </ul>
  <button class="floater-menu icon" title="Information">i</button><ul class="floater-cascade">
-  <a href="https://github.com/WRtux/blog">Version 0.3</a>
+  <a href="https://github.com/WRtux/blog">Version 0.4</a>
  </ul>
 </nav>
 
@@ -42,6 +41,8 @@
   <!-- Dynamic -->
  </article>
 </main>
+
+<script src="/web/marked.min.js"></script>
 
 <script src="/web/main.min.js"></script>
 <script type="text/javascript">"use strict";
@@ -60,6 +61,7 @@ function interact(act) {
 	}
 }
 
+/*
 (function () {
 	renderDirect("marked", url);
 	var lis = sortList(fetchList("/blog/").list);
@@ -72,6 +74,23 @@ function interact(act) {
 		document.queryId("recent").appendChild(cont);
 	}
 })();
+*/
+void async function () {
+	renderURL('marked', url);
+	try {
+		let li = await fetchArticleList('/blog/meta.xml');
+		for (let en of li.slice(-3).reverse()) {
+			let cont = document.createElement('article');
+			cont.classList.add('marked-abstract');
+			cont.setAttribute('href', '/list/' + en.fileName);
+			cont.addEventListener('click', (e) => location.assign(e.currentTarget.getAttribute('href')));
+			await renderURL(cont, '/blog/' + en.fileName, {abstract: true});
+			document.getElementById('recent').appendChild(cont);
+		}
+	} catch (err) {
+		document.getElementById('recent').appendChild(buildFailure(err));
+	}
+}();
 
 </script>
 </body></html>
