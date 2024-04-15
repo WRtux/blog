@@ -87,3 +87,12 @@ body> * {
 	background-color: var(--background-normal);
 	box-shadow: var(--shadow);
 }
+
+@media screen and (max-width: 540px) {
+	#wrapper> article, #wrapper> iframe {
+		margin-left: 15px;
+		margin-right: 15px;
+		width: auto;
+		max-width: none;
+	}
+}

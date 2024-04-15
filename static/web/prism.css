@@ -1,18 +1,20 @@
 /** Adapted from prism.js default theme for JavaScript, CSS and HTML */
-#wrapper pre> code {
+code[class*="language-"] {
 	tab-size: 4;
-	background-color: #fcf9f9;
-	color: #346;
-	text-shadow: 0 1px #fff;
+	/* background-color: #fcf9f9; */
+	/* color: #346; */
+	/* text-shadow: 0 1px #fff; */
+	color: var(--text-normal);
+	text-shadow: var(--shadow-text);
 }
-#wrapper pre> code::selection,
-#wrapper pre> code ::selection {
+code[class*="language-"]::selection,
+code[class*="language-"] ::selection {
 	background-color: #b3d4fc;
 	text-shadow: none;
 }
 
 @media print {
-	#wrapper pre> code {
+	code[class*="language-"] {
 		text-shadow: none;
 	}
 }

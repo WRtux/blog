@@ -9,12 +9,6 @@ article {
 	 color: #223344;
 	color: var(--text-normal);
 }
-article> *:first-child {
-	margin-top: 5px;
-}
-article> *:last-child {
-	margin-bottom: 5px;
-}
 
 /* Article abstract */
 article.marked-abstract {
@@ -32,12 +26,17 @@ article article.marked-abstract {
 }
 
 /* Article element margins */
+article> *, article blockquote> * {
+	margin: 15px 0;
+}
+article> *:first-child, article blockquote> *:first-child {
+	margin-top: 5px;
+}
+article> *:last-child, article blockquote> *:last-child {
+	margin-bottom: 5px;
+}
 article h1, article h2, article h3 {
 	margin: 20px 0;
-}
-article h4, article h5, article h6,
-article p, article ol, article ul, article hr, article progress, article blockquote, article pre, article code, article article {
-	margin: 15px 0;
 }
 
 /* Title elements */
@@ -120,12 +119,6 @@ article blockquote {
 	 font-family: serif;
 	font-family: var(--font-serif);
 }
-article blockquote> *:first-child {
-	margin-top: 5px;
-}
-article blockquote> *:last-child {
-	margin-bottom: 5px;
-}
 
 article pre, article code {
 	display: block;
@@ -138,7 +131,6 @@ article pre, article code {
 	white-space: pre;
 	
 	background-color: var(--background-aux);
-	color: #369;
 	color: var(--text-aux);
 }
 article code {
@@ -188,13 +180,13 @@ article q {
 	word-break: break-all;
 	
 	background-color: var(--background-mark);
-	color: #369;
 	color: var(--text-aux);
 }
 article q::before, article q::after {
 	content: none;
 }
 
+/* Printing adjustment */
 @media print {
 	article blockquote, article pre, article code, article article {
 		box-shadow: none;
@@ -208,12 +200,12 @@ article q::before, article q::after {
 
 @media screen and (prefers-color-scheme: dark) {
 	article blockquote, article pre, article code, article article {
-		border-width: 0;
+		border-color: transparent;
 	}
-	article blockquote, article article {
-		border-left-width: 5px;
+	article blockquote {
+		border-left-color: var(--border-normal);
 	}
 	article code {
-		border-left-width: 25px;
+		border-left-color: var(--border-aux);
 	}
 }
