@@ -1,12 +1,5 @@
+# Static resources (temporary)
+/static/
+
 # Actual blogs and media
-/blog/*.md
-/blog/blog/
-/blog/draft/
-/blog/project/
-/blog/media/
-
-# Backup files
-/backup/
-
-# Security related (SSL certificates, private keys, etc.)
-/security/
+/content/
